@@ -1,0 +1,230 @@
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/cars":
+    get:
+      summary: List cars
+      description: Get a list of all cars
+      tags: [Carros]
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                  - id: 1
+                    name: Toyota
+                    model: Camry
+                  - id: 2
+                    name: Honda
+                    model: Accord
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    model:
+                      type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    message: Cars not found
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    post:
+      summary: Create car
+      description: Create a new car
+      tags: [Carros]
+      parameters: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    id: 1
+                    name: Toyota
+                    model: Camry
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  model:
+                    type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    message: Invalid car data
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  example: Toyota
+                  type: string
+                model:
+                  example: Camry
+                  type: string
+              required:
+              - name
+              - model
+  "/cars/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: Car ID
+      schema:
+        type: integer
+    get:
+      summary: Show car
+      description: Get details of a specific car
+      tags: [Carros]
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    id: 1
+                    name: Toyota
+                    model: Camry
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  model:
+                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    message: Car not found
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    patch:
+      summary: Update car
+      description: Update details of a specific car
+      tags: [Carros]
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    id: 1
+                    name: Toyota
+                    model: Camry
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  model:
+                    type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    message: Invalid car data
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    message: Car not found
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  example: Toyota
+                  type: string
+                model:
+                  example: Camry
+                  type: string
+    delete:
+      summary: Delete car
+      description: Delete a specific car
+      tags: [Carros]
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    message: Car not found
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+servers: []
